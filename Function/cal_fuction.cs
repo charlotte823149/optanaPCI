@@ -813,7 +813,6 @@ namespace optanaPCI.Function
             return new Point() { X = new_X, Y = new_Y };
         }
 
-
         #region calculate matrix
         public void transform_matrix()
         {

@@ -16,7 +16,7 @@ namespace optanaPCI.Control
 {
 
 	public partial class ImageViewBox : UserControl
-    {
+	{
 		#region parameter setting
 		public string path = "", fileName = "";
 		bool newData_flag = true;
@@ -46,39 +46,39 @@ namespace optanaPCI.Control
 			newData_flag = true;
 		}
 
-		public void categoryChange(string input) 
-        {
+		public void categoryChange(string input)
+		{
 			category = input;
 			string[] str = input.Split('.');
 			int type = Convert.ToInt32(str[0]);
 			//if(type == 7 || type == 17)
-   //         {
+			//         {
 			//	drawType = (int)DrawType.line;
-   //         }
-			if(type == 7 || type == 8 || type == 10 || type == 17)
-            {
+			//         }
+			if (type == 7 || type == 8 || type == 10 || type == 17)
+			{
 				drawType = (int)DrawType.curve;
-            }
-            else
-            {
+			}
+			else
+			{
 				drawType = (int)DrawType.area;
-            }
+			}
 			newData_flag = true;
-        }
+		}
 
 		public void levelChange(string le)
-        {
+		{
 			level = le;
 			newData_flag = true;
-        }
+		}
 
 		public void newData()
-        {
+		{
 			newData_flag = true;
 		}
 
 		public void ZoomIn()
-        {
+		{
 			ScaleTransform st = canvas.LayoutTransform as ScaleTransform;
 			st = new ScaleTransform(ratio, ratio);
 			if (ratio < 2)
@@ -86,15 +86,15 @@ namespace optanaPCI.Control
 				ratio = ratio + 0.1;
 			}
 			st = new ScaleTransform(ratio, ratio);
-            canvas.LayoutTransform = st;
-            base1.Width = Math.Abs(cal_function.origin_points[0].X - cal_function.origin_points[1].X) * ratio;
-            base2.Width = Point.Subtract(cal_function.origin_points[1], cal_function.origin_points[2]).Length * ratio;
-            base3.Width = Math.Abs(cal_function.origin_points[2].X - cal_function.origin_points[3].X) * ratio;
-            base4.Width = Point.Subtract(cal_function.origin_points[3], cal_function.origin_points[0]).Length * ratio;
-        }
+			canvas.LayoutTransform = st;
+			base1.Width = Math.Abs(cal_function.origin_points[0].X - cal_function.origin_points[1].X) * ratio;
+			base2.Width = Point.Subtract(cal_function.origin_points[1], cal_function.origin_points[2]).Length * ratio;
+			base3.Width = Math.Abs(cal_function.origin_points[2].X - cal_function.origin_points[3].X) * ratio;
+			base4.Width = Point.Subtract(cal_function.origin_points[3], cal_function.origin_points[0]).Length * ratio;
+		}
 
 		public void ZoomOut()
-        {
+		{
 			ScaleTransform st = canvas.LayoutTransform as ScaleTransform;
 			st = new ScaleTransform(ratio, ratio);
 			if (ratio > 0.2)
@@ -109,7 +109,7 @@ namespace optanaPCI.Control
 			base4.Width = Point.Subtract(cal_function.origin_points[3], cal_function.origin_points[0]).Length * ratio;
 		}
 		#endregion
-		
+
 		#region drawing
 		private void drawPoint(double x, double y)
 		{
@@ -139,7 +139,7 @@ namespace optanaPCI.Control
 			canvas.Children.Add(line);
 		}
 
-		private void drawPolyline (List<Point> points)
+		private void drawPolyline(List<Point> points)
 		{
 			SolidColorBrush brush = new SolidColorBrush();
 			brush.Color = Colors.Yellow;
@@ -160,31 +160,31 @@ namespace optanaPCI.Control
 			SolidColorBrush brush = new SolidColorBrush();
 			brush.Color = Colors.White;
 			Polygon polygon = new Polygon();
-			PointCollection pointCollection = new PointCollection();		
+			PointCollection pointCollection = new PointCollection();
 			foreach (Point point in points)
-            {
+			{
 				pointCollection.Add(point);
-            }
+			}
 			polygon.Points = pointCollection;
 			polygon.Stroke = brush;
 			polygon.StrokeThickness = 2;
 			canvas.Children.Add(polygon);
 		}
-		
+
 		private void drawStandard(List<Point> points)
-        {
-            //SolidColorBrush brush = new SolidColorBrush();
-            //brush.Color = Colors.Red;
-            //Line line1 = new Line() { X1 = points[0].X, Y1 = points[0].Y, X2 = points[1].X, Y2 = points[1].Y };
-            //Line line2 = new Line() { X1 = points[1].X, Y1 = points[1].Y, X2 = points[2].X, Y2 = points[2].Y };
-            //Line line3 = new Line() { X1 = points[2].X, Y1 = points[2].Y, X2 = points[3].X, Y2 = points[3].Y };
-            //Line line4 = new Line() { X1 = points[3].X, Y1 = points[3].Y, X2 = points[0].X, Y2 = points[0].Y };
-            //line1.Stroke = line2.Stroke = line3.Stroke = line4.Stroke = brush;
-            //line1.StrokeThickness = line2.StrokeThickness = line3.StrokeThickness = line4.StrokeThickness = 5;
-            //canvas.Children.Add(line1);
-            //canvas.Children.Add(line2);
-            //canvas.Children.Add(line3);
-            //canvas.Children.Add(line4);
+		{
+			//SolidColorBrush brush = new SolidColorBrush();
+			//brush.Color = Colors.Red;
+			//Line line1 = new Line() { X1 = points[0].X, Y1 = points[0].Y, X2 = points[1].X, Y2 = points[1].Y };
+			//Line line2 = new Line() { X1 = points[1].X, Y1 = points[1].Y, X2 = points[2].X, Y2 = points[2].Y };
+			//Line line3 = new Line() { X1 = points[2].X, Y1 = points[2].Y, X2 = points[3].X, Y2 = points[3].Y };
+			//Line line4 = new Line() { X1 = points[3].X, Y1 = points[3].Y, X2 = points[0].X, Y2 = points[0].Y };
+			//line1.Stroke = line2.Stroke = line3.Stroke = line4.Stroke = brush;
+			//line1.StrokeThickness = line2.StrokeThickness = line3.StrokeThickness = line4.StrokeThickness = 5;
+			//canvas.Children.Add(line1);
+			//canvas.Children.Add(line2);
+			//canvas.Children.Add(line3);
+			//canvas.Children.Add(line4);
 
 			double top1 = -scrollViewer.VerticalOffset + cal_function.origin_points[0].Y * ratio + 271;
 			double top3 = -scrollViewer.VerticalOffset + cal_function.origin_points[3].Y * ratio + 271;
@@ -192,23 +192,23 @@ namespace optanaPCI.Control
 			double left3 = -scrollViewer.HorizontalOffset + cal_function.origin_points[3].X * ratio;
 
 			base1.Width = Math.Abs(points[0].X - points[1].X) * ratio;
-            base1.Margin = new Thickness(left1, top1, 0, 0);
+			base1.Margin = new Thickness(left1, top1, 0, 0);
 
-            base2.Width = Point.Subtract(points[1], points[2]).Length * ratio;
-            double angle = Math.Atan2(points[1].Y - points[2].Y, points[2].X - points[1].X);
-            angle = -angle * 180 / Math.PI;
-            base2.RenderTransform = new RotateTransform(angle);
-            base2.Margin = new Thickness(left1 + base1.Width, top1, 0, 0);
+			base2.Width = Point.Subtract(points[1], points[2]).Length * ratio;
+			double angle = Math.Atan2(points[1].Y - points[2].Y, points[2].X - points[1].X);
+			angle = -angle * 180 / Math.PI;
+			base2.RenderTransform = new RotateTransform(angle);
+			base2.Margin = new Thickness(left1 + base1.Width, top1, 0, 0);
 
-            base3.Width = Math.Abs(points[2].X - points[3].X) * ratio;
-            base3.Margin = new Thickness(left3, top3, 0, 0);
+			base3.Width = Math.Abs(points[2].X - points[3].X) * ratio;
+			base3.Margin = new Thickness(left3, top3, 0, 0);
 
-            base4.Width = Point.Subtract(points[3], points[0]).Length * ratio;
-            angle = Math.Atan2(points[0].Y - points[3].Y, points[0].X - points[3].X);
-            angle = angle * 180 / Math.PI + 180;
-            base4.RenderTransform = new RotateTransform(angle);
-            base4.Margin = new Thickness(left1 + 5, top1 + 5, 0, 0);
-        }
+			base4.Width = Point.Subtract(points[3], points[0]).Length * ratio;
+			angle = Math.Atan2(points[0].Y - points[3].Y, points[0].X - points[3].X);
+			angle = angle * 180 / Math.PI + 180;
+			base4.RenderTransform = new RotateTransform(angle);
+			base4.Margin = new Thickness(left1 + 5, top1 + 5, 0, 0);
+		}
 		#endregion
 
 		#region data add, save, read, delete
@@ -284,7 +284,7 @@ namespace optanaPCI.Control
 						foreach (drawingData data in drawingDataList)
 						{
 							if (data.points.Count > 0)
-                            {
+							{
 								string pp = "";
 								foreach (Point point in data.points)
 								{
@@ -298,12 +298,12 @@ namespace optanaPCI.Control
 									data.length.ToString() + " " +
 									data.area.ToString() + " {" + pp + " }"
 									);
-							}							
+							}
 						}
-                        foreach (conditionData data in conditionDataList)
-                        {
+						foreach (conditionData data in conditionDataList)
+						{
 							output.WriteLine("* " + data.Category + " " + data.Number.ToString() + " *");
-                        }
+						}
 						string[] ss = pci_TextBox.Text.Split();
 						output.WriteLine("[ " + ss[2] + " ]");
 					}
@@ -322,9 +322,9 @@ namespace optanaPCI.Control
 		}
 
 		private void redraw(string path, string fileName)
-		{			
+		{
 			try
-			{		
+			{
 				using (StreamReader input = new StreamReader(path + "/temp/" + fileName + ".txt"))
 				{
 					reset();
@@ -339,17 +339,18 @@ namespace optanaPCI.Control
 							base_combo.SelectedIndex = baseType;
 						}
 						else if (ss[0] == "*")
-                        {
+						{
 							conditionDataList.Add(new conditionData()
 							{
 								Category = ss[1],
 								Number = Convert.ToInt32(ss[2])
 							});
 							conditionView.Items.Add(new conditionviewData()
-							{ 
-								cate = ss[1], num = Convert.ToInt32(ss[2])
+							{
+								cate = ss[1],
+								num = Convert.ToInt32(ss[2])
 							});
-                        }
+						}
 						else if (ss[0] != "[")
 						{
 							drawingDataList.Add(new drawingData()
@@ -398,7 +399,7 @@ namespace optanaPCI.Control
 					drawStandard(cal_function.origin_points);
 					double pci = cal_function.PCI(drawingDataList);
 					pci_TextBox.Text = "PCI : " + pci.ToString();
-				}				
+				}
 			}
 			catch
 			{
@@ -439,49 +440,49 @@ namespace optanaPCI.Control
 				redraw(path, fileName);
 			}
 		}
-        #endregion
+		#endregion
 
-        #region Event
-        private void scrollViewer_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+		#region Event
+		private void scrollViewer_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
 			Point current_p = e.GetPosition(canvas);
 			if (current_p.X < canvas.Width && current_p.Y < canvas.Height)
-            {
+			{
 				drawPoint(current_p.X, current_p.Y);
 				drawingDataAdd(current_p, listView.SelectedIndex);
 				saveTemp(path, fileName);
 				redraw(path, fileName);
-			}			
+			}
 		}
 
 		//canvas position to grid position: (0, 0) => (0, 271)
 		private void scrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
 		{
-            //vertical
-            double top1 = -scrollViewer.VerticalOffset + cal_function.origin_points[0].Y * ratio + 271;
-            double top3 = -scrollViewer.VerticalOffset + cal_function.origin_points[3].Y * ratio + 271;
-            if (top1 > 965)
-            {
-                base1.Visibility = Visibility.Hidden;
-                base2.Visibility = Visibility.Hidden;
-                base3.Visibility = Visibility.Hidden;
-                base4.Visibility = Visibility.Hidden;
-            }
-            else
-            {
-                base1.Visibility = Visibility.Visible;
-                base2.Visibility = Visibility.Visible;
-                base3.Visibility = Visibility.Visible;
-                base4.Visibility = Visibility.Visible;
-            }
-            base1.Margin = new Thickness(base1.Margin.Left, top1, 0, 0);
-            base2.Margin = new Thickness(base2.Margin.Left, top1, 0, 0);
-            base3.Margin = new Thickness(base3.Margin.Left, top3, 0, 0);
-            base4.Margin = new Thickness(base4.Margin.Left, top1 + 5, 0, 0);
+			//vertical
+			double top1 = -scrollViewer.VerticalOffset + cal_function.origin_points[0].Y * ratio + 271;
+			double top3 = -scrollViewer.VerticalOffset + cal_function.origin_points[3].Y * ratio + 271;
+			if (top1 > 965)
+			{
+				base1.Visibility = Visibility.Hidden;
+				base2.Visibility = Visibility.Hidden;
+				base3.Visibility = Visibility.Hidden;
+				base4.Visibility = Visibility.Hidden;
+			}
+			else
+			{
+				base1.Visibility = Visibility.Visible;
+				base2.Visibility = Visibility.Visible;
+				base3.Visibility = Visibility.Visible;
+				base4.Visibility = Visibility.Visible;
+			}
+			base1.Margin = new Thickness(base1.Margin.Left, top1, 0, 0);
+			base2.Margin = new Thickness(base2.Margin.Left, top1, 0, 0);
+			base3.Margin = new Thickness(base3.Margin.Left, top3, 0, 0);
+			base4.Margin = new Thickness(base4.Margin.Left, top1 + 5, 0, 0);
 
-            //horizontal
-            double left1 = -scrollViewer.HorizontalOffset + cal_function.origin_points[0].X * ratio;
-            double left3 = -scrollViewer.HorizontalOffset + cal_function.origin_points[3].X * ratio;
+			//horizontal
+			double left1 = -scrollViewer.HorizontalOffset + cal_function.origin_points[0].X * ratio;
+			double left3 = -scrollViewer.HorizontalOffset + cal_function.origin_points[3].X * ratio;
 
 			base1.Margin = new Thickness(left1, base1.Margin.Top, 0, 0);
 			base2.Margin = new Thickness(left1 + base1.Width, base2.Margin.Top, 0, 0);
@@ -509,114 +510,131 @@ namespace optanaPCI.Control
 
 		#region base setting
 		private void base_combo_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-			baseChange(base_combo.SelectedIndex, path, fileName);
-		}
-		
-		private void baseChange(int index, string path, string fileName)
 		{
+			baseChange(base_combo.SelectedIndex, path, fileName, Convert.ToDouble(Length_TextBox.Text), Convert.ToDouble(Width_TextBox.Text));
+		}
+
+		private void Length_TextBox_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Enter)
+            {
+				baseChange(base_combo.SelectedIndex, path, fileName, Convert.ToDouble(Length_TextBox.Text), Convert.ToDouble(Width_TextBox.Text));
+			}
+		}
+
+		private void Width_TextBox_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Enter)
+			{
+				baseChange(base_combo.SelectedIndex, path, fileName, Convert.ToDouble(Length_TextBox.Text), Convert.ToDouble(Width_TextBox.Text));
+			}
+		}
+		private void baseChange(int index, string path, string fileName, double l, double w)
+		{
+			l = l / 1624;
+			w = w / 1234;
 			switch (index)
 			{
 				case 0: //941.jpg
 					cal_function.origin_points.Clear();
-					cal_function.origin_points.Add(new Point { X = 360, Y = 700 });
-					cal_function.origin_points.Add(new Point { X = 880, Y = 700 });
-					cal_function.origin_points.Add(new Point { X = 1610, Y = 1225 });
-					cal_function.origin_points.Add(new Point { X = 5, Y = 1225 });
+					cal_function.origin_points.Add(new Point { X = 360 * l, Y = 700 * w });
+					cal_function.origin_points.Add(new Point { X = 880 * l, Y = 700 * w });
+					cal_function.origin_points.Add(new Point { X = 1610 * l, Y = 1225 * w });
+					cal_function.origin_points.Add(new Point { X = 5 * l, Y = 1225 * w });
 					cal_function.after_points.Clear();
-					cal_function.after_points.Add(new Point { X = 0, Y = 0 });
-					cal_function.after_points.Add(new Point { X = 4, Y = 0 });
-					cal_function.after_points.Add(new Point { X = 4, Y = 5 });
-					cal_function.after_points.Add(new Point { X = 0, Y = 5 });
+					cal_function.after_points.Add(new Point { X = 0 * l, Y = 0 * w });
+					cal_function.after_points.Add(new Point { X = 4 * l, Y = 0 * w });
+					cal_function.after_points.Add(new Point { X = 4 * l, Y = 5 * w });
+					cal_function.after_points.Add(new Point { X = 0 * l, Y = 5 * w });
 					break;
 				case 1: //71.jpg
 					cal_function.origin_points.Clear();
-					cal_function.origin_points.Add(new Point { X = 460, Y = 670 });
-					cal_function.origin_points.Add(new Point { X = 640, Y = 670 });
-					cal_function.origin_points.Add(new Point { X = 1620, Y = 1225 });
-					cal_function.origin_points.Add(new Point { X = 0, Y = 1225 });
+					cal_function.origin_points.Add(new Point { X = 460 * l, Y = 670 * w });
+					cal_function.origin_points.Add(new Point { X = 640 * l, Y = 670 * w });
+					cal_function.origin_points.Add(new Point { X = 1620 * l, Y = 1225 * w });
+					cal_function.origin_points.Add(new Point { X = 0 * l, Y = 1225 * w });
 					cal_function.after_points.Clear();
-					cal_function.after_points.Add(new Point { X = 0, Y = 0 });
-					cal_function.after_points.Add(new Point { X = 4, Y = 0 });
-					cal_function.after_points.Add(new Point { X = 4, Y = 5 });
-					cal_function.after_points.Add(new Point { X = 0, Y = 5 });
+					cal_function.after_points.Add(new Point { X = 0 * l, Y = 0 * w });
+					cal_function.after_points.Add(new Point { X = 4 * l, Y = 0 * w });
+					cal_function.after_points.Add(new Point { X = 4 * l, Y = 5 * w });
+					cal_function.after_points.Add(new Point { X = 0 * l, Y = 5 * w });
 					break;
 				case 2: //2.jpg
 					cal_function.origin_points.Clear();
-					cal_function.origin_points.Add(new Point { X = 910, Y = 700 });
-					cal_function.origin_points.Add(new Point { X = 1165, Y = 700 });
-					cal_function.origin_points.Add(new Point { X = 1625, Y = 1220 });
-					cal_function.origin_points.Add(new Point { X = 60, Y = 1220 });
+					cal_function.origin_points.Add(new Point { X = 910 * l, Y = 700 * w });
+					cal_function.origin_points.Add(new Point { X = 1165 * l, Y = 700 * w });
+					cal_function.origin_points.Add(new Point { X = 1625 * l, Y = 1220 * w });
+					cal_function.origin_points.Add(new Point { X = 60 * l, Y = 1220 * w });
 					cal_function.after_points.Clear();
-					cal_function.after_points.Add(new Point { X = 0, Y = 0 });
-					cal_function.after_points.Add(new Point { X = 4, Y = 0 });
-					cal_function.after_points.Add(new Point { X = 4, Y = 15 });
-					cal_function.after_points.Add(new Point { X = 0, Y = 15 });
+					cal_function.after_points.Add(new Point { X = 0 * l, Y = 0 * w });
+					cal_function.after_points.Add(new Point { X = 4 * l, Y = 0 * w });
+					cal_function.after_points.Add(new Point { X = 4 * l, Y = 15 * w });
+					cal_function.after_points.Add(new Point { X = 0 * l, Y = 15 * w });
 					break;
 				case 3: //128.jpg
 					cal_function.origin_points.Clear();
-					cal_function.origin_points.Add(new Point { X = 925, Y = 580 });
-					cal_function.origin_points.Add(new Point { X = 1000, Y = 580 });
-					cal_function.origin_points.Add(new Point { X = 1615, Y = 1220 });
-					cal_function.origin_points.Add(new Point { X = 308, Y = 1220 });
+					cal_function.origin_points.Add(new Point { X = 925 * l, Y = 580 * w });
+					cal_function.origin_points.Add(new Point { X = 1000 * l, Y = 580 * w });
+					cal_function.origin_points.Add(new Point { X = 1615 * l, Y = 1220 * w });
+					cal_function.origin_points.Add(new Point { X = 308 * l, Y = 1220 * w });
 					cal_function.after_points.Clear();
-					cal_function.after_points.Add(new Point { X = 0, Y = 0 });
-					cal_function.after_points.Add(new Point { X = 4, Y = 0 });
-					cal_function.after_points.Add(new Point { X = 4, Y = 15 });
-					cal_function.after_points.Add(new Point { X = 0, Y = 15 });
+					cal_function.after_points.Add(new Point { X = 0 * l, Y = 0 * w });
+					cal_function.after_points.Add(new Point { X = 4 * l, Y = 0 * w });
+					cal_function.after_points.Add(new Point { X = 4 * l, Y = 15 * w });
+					cal_function.after_points.Add(new Point { X = 0 * l, Y = 15 * w });
 					break;
 				case 4: //209.jpg
 					cal_function.origin_points.Clear();
-					cal_function.origin_points.Add(new Point { X = 555, Y = 580 });
-					cal_function.origin_points.Add(new Point { X = 630, Y = 580 });
-					cal_function.origin_points.Add(new Point { X = 1285, Y = 1220 });
-					cal_function.origin_points.Add(new Point { X = 2, Y = 1220 });
+					cal_function.origin_points.Add(new Point { X = 555 * l, Y = 580 * w });
+					cal_function.origin_points.Add(new Point { X = 630 * l, Y = 580 * w });
+					cal_function.origin_points.Add(new Point { X = 1285 * l, Y = 1220 * w });
+					cal_function.origin_points.Add(new Point { X = 2 * l, Y = 1220 * w });
 					cal_function.after_points.Clear();
-					cal_function.after_points.Add(new Point { X = 0, Y = 0 });
-					cal_function.after_points.Add(new Point { X = 4, Y = 0 });
-					cal_function.after_points.Add(new Point { X = 4, Y = 15 });
-					cal_function.after_points.Add(new Point { X = 0, Y = 15 });
+					cal_function.after_points.Add(new Point { X = 0 * l, Y = 0 * w });
+					cal_function.after_points.Add(new Point { X = 4 * l, Y = 0 * w });
+					cal_function.after_points.Add(new Point { X = 4 * l, Y = 15 * w });
+					cal_function.after_points.Add(new Point { X = 0 * l, Y = 15 * w });
 					break;
 			}
 			canvas.Children.Clear();
 			cal_function.transform_matrix();
 			baseType = index;
 			if (drawingDataList.Count > 0)
-            {
+			{
 				saveTemp(path, fileName);
 				redraw(path, fileName);
 			}
-            else
-            {
+			else
+			{
 				drawStandard(cal_function.origin_points);
-			}			
+			}
 		}
 
-        #endregion
+		#endregion
 
-        #region condition record
+		#region condition record
 		public void conditionRecord()
-        {
+		{
 			string cate = "";
 			int num = 0;
 			if (ditch.IsChecked == true && ditch_Combo.SelectedIndex != -1)
-            {
+			{
 				cate = "水溝";
 				num = ditch_Combo.SelectedIndex + 1;
 				ditch.IsChecked = false;
-            }
+			}
 			else if (coil.IsChecked == true && coil_Combo.SelectedIndex != -1)
-            {
+			{
 				cate = "感應線圈";
 				num = coil_Combo.SelectedIndex + 1;
 				coil.IsChecked = false;
-            }
+			}
 			else if (manhole.IsChecked == true && manhole_Combo.SelectedIndex != -1)
-            {
+			{
 				cate = "人手孔";
 				num = manhole_Combo.SelectedIndex + 1;
 				manhole.IsChecked = false;
-            }
+			}
 			else if (junction.IsChecked == true && junction_Combo.SelectedIndex != -1)
 			{
 				cate = "新舊面交界";
@@ -624,64 +642,64 @@ namespace optanaPCI.Control
 				junction.IsChecked = false;
 			}
 			else if (expansion.IsChecked == true && expansion_Combo.SelectedIndex != -1)
-            {
+			{
 				cate = "伸縮縫";
 				num = expansion_Combo.SelectedIndex + 1;
 				expansion.IsChecked = false;
-            }
+			}
 			else if (intersection.IsChecked == true && intersection_Combo.SelectedIndex != -1)
-            {
+			{
 				cate = "路口交界";
 				num = intersection_Combo.SelectedIndex + 1;
 				intersection.IsChecked = false;
-            }
+			}
 			else if (railway.IsChecked == true && railway_Combo.SelectedIndex != -1)
-            {
+			{
 				cate = "鐵路平交道";
 				num = railway_Combo.SelectedIndex + 1;
 				railway.IsChecked = false;
-            }
+			}
 			else if (slowhump.IsChecked == true && slowhump_Combo.SelectedIndex != -1)
-            {
+			{
 				cate = "減速坡";
 				num = slowhump_Combo.SelectedIndex + 1;
 				slowhump.IsChecked = false;
-            }
+			}
 			else if (nonasphalt.IsChecked == true && nonasphalt_Combo.SelectedIndex != -1)
-            {
+			{
 				cate = "非瀝青路面";
 				num = nonasphalt_Combo.SelectedIndex + 1;
 				nonasphalt.IsChecked = false;
-            }
+			}
 			else if (slowline.IsChecked == true && slowline_Combo.SelectedIndex != -1)
-            {
+			{
 				cate = "減速線";
 				num = slowline_Combo.SelectedIndex + 1;
 				slowline.IsChecked = false;
-            }
+			}
 			else if (usertype.IsChecked == true)
-            {
+			{
 				if (cate == "")
-                {
+				{
 					MessageBox.Show("種類不可為空");
 					return;
-                }
+				}
 				cate = usertype_cate.Text;
 				num = Convert.ToInt32(usertype_num.Text);
 				usertype.IsChecked = false;
-            }
+			}
 
 			if (num != 0)
-            {
+			{
 				int id = conditionDataList.FindIndex(x => x.Category.Equals(cate));
 				if (id != -1)
-                {
+				{
 					conditionDataList[id].Number += num;
 					saveTemp(path, fileName);
 					redraw(path, fileName);
 				}
 				else
-                {
+				{
 					conditionDataList.Add(new conditionData()
 					{
 						Category = cate,
@@ -692,13 +710,13 @@ namespace optanaPCI.Control
 						cate = cate,
 						num = num
 					});
-				}				
+				}
 			}
-			conditionReset();			
+			conditionReset();
 		}
 
 		private void conditionReset()
-        {
+		{
 			//reset condition case index
 			ditch_Combo.SelectedIndex = coil_Combo.SelectedIndex = manhole_Combo.SelectedIndex = -1;
 			junction_Combo.SelectedIndex = expansion_Combo.SelectedIndex = intersection_Combo.SelectedIndex = -1;
@@ -709,21 +727,21 @@ namespace optanaPCI.Control
 		}
 
 		public void conditionDelete(int index)
-        {
+		{
 			if (index > -1)
-            {
+			{
 				conditionDataList.RemoveAt(index);
 				conditionView.Items.RemoveAt(index);
 				conditionView.SelectedIndex = conditionView.Items.Count;
 			}
-        }
+		}
 		#endregion
 
 		#region resetting, cal length and area
 		private void reset()
 		{
 			//point list clear
-			drawingDataList.Clear();			
+			drawingDataList.Clear();
 			listView.Items.Clear();
 
 			//condition list clear
@@ -732,7 +750,7 @@ namespace optanaPCI.Control
 			conditionReset();
 			//canvas clear
 			canvas.Children.Clear();
-			pci_TextBox.Text = "PCI : 100";			
+			pci_TextBox.Text = "PCI : 100";
 		}
 
 		private double calculate(int num)
@@ -775,14 +793,14 @@ namespace optanaPCI.Control
 
 		#region list data class & enum
 		public class listviewData
-        {
+		{
 			public string damageType { get; set; }
 			public string damageLevel { get; set; }
 			public double length { get; set; }
 			public double area { get; set; }
 		}
 
-		public class conditionviewData
+        public class conditionviewData
 		{
 			public string cate { get; set; }
 			public int num { get; set; }
@@ -793,7 +811,7 @@ namespace optanaPCI.Control
 			line = 0,
 			curve = 1,
 			area = 2
-        }
+		}
 
 		enum BaseType : int
 		{
@@ -803,6 +821,6 @@ namespace optanaPCI.Control
 			center_left = 3,
 			crnter_right = 4
 		}
-        #endregion
-    }
+		#endregion
+	}
 }

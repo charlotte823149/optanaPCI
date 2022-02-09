@@ -154,6 +154,10 @@
                     <RadioButton x:Name="usertype" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="701" Canvas.Top="28"/>
                 </Canvas>
             </GroupBox>
+            <Label Content="照片大小" HorizontalAlignment="Left" Margin="819,260,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.467,0.52"/>
+            <TextBox x:Name="Length_TextBox" HorizontalAlignment="Left" Height="21" Margin="882,262,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Text="1624" KeyDown="Length_TextBox_KeyDown"/>
+            <TextBox x:Name="Width_TextBox" HorizontalAlignment="Left" Height="21" Margin="967,263,0,0" TextWrapping="Wrap" Text="1234" VerticalAlignment="Top" Width="60" KeyDown="Width_TextBox_KeyDown"/>
+            <Label Content="*" HorizontalAlignment="Left" Margin="947,263,0,0" VerticalAlignment="Top" Height="20"/>
         </Grid>
     </Viewbox>
 </UserControl>

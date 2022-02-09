@@ -469,8 +469,13 @@ namespace optanaPCI
                 "3.選擇破壞類型及等級並在圖片上畫出直線或多邊形\n" +
                 "4.按下ctrl + S儲存圖片\n" +
                 "5.重複1.~4.直到資料夾內檔案都修改完成\n" +
-                "6.按下[匯出]製作excel報表\n\n" +
-                "快捷鍵:\n" +
+                "6.按下ctrl+S儲存最後一張照片資訊\n" +
+                "7.按下[匯出]製作excel報表\n\n" +
+                "圖片大小與基底切換:\n" +
+                "輸入[長]與[寬]後按下Enter鍵即可設定圖片大小並且重新計算基底\n" +
+                "有五種基底可供選擇\n" +
+                "!!! 更改圖片大小後必須在重新看過所有照片後才會重新計算PCI !!!\n\n" + 
+                "快捷鍵(必須切換為英文輸入法才可使用):\n" +
                 "ctrl + S: 儲存當前圖片的破壞資訊\n" +
                 "ctrl + C: 按下後即可使用方向鍵[左]、[右]來切換上一張或下一張圖片\n" +
                 "ctrl + Z: 返回上一步(畫圖的部分)\n" +
@@ -714,12 +719,6 @@ namespace optanaPCI
 
             string[] temp = path.Split(new[] { "\\" }, StringSplitOptions.None);
             string savepath = path + "\\" + temp[temp.Length - 1] + ".xlsx";
-            //Microsoft.Office.Interop.Excel.Application oXL = new Microsoft.Office.Interop.Excel.Application();
-            //if (oXL.Version.Equals("15.0"))
-            //{
-            //    MessageBox.Show("The verion is 15.0.0.0");
-            //    return;
-            //}
             bool IsExists = File.Exists(savepath);
             if (IsExists)
             {
