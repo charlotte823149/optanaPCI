@@ -27,7 +27,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ProductName>optanaPCI2020</ProductName>
     <PublisherName>王筑青</PublisherName>
-    <ApplicationRevision>18</ApplicationRevision>
+    <ApplicationRevision>19</ApplicationRevision>
     <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>

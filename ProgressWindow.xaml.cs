@@ -184,18 +184,6 @@ namespace optanaPCI
                                         }
                                     }
 
-                                    //add condition
-                                    if (img_condition.Count != 0)
-                                    {
-                                        string condition = "";
-                                        foreach (conditionData item in img_condition)
-                                        {
-                                            condition += item.Category + "*" + item.Number + "\n";
-                                        }
-                                        data_ws.Cells[damage_start, 9].Value = condition;
-                                        img_condition.Clear();
-                                    }
-
                                     //merging cells
                                     if (start > ccd_start)
                                     {
@@ -215,6 +203,18 @@ namespace optanaPCI
                                         data_ws.Row(ccd_start).Height = cellHeight;
                                     }
 
+                                    //add condition
+                                    if (img_condition.Count != 0)
+                                    {
+                                        string condition = "";
+                                        foreach (conditionData item in img_condition)
+                                        {
+                                            condition += item.Category + "*" + item.Number + "\n";
+                                        }
+                                        data_ws.Cells[damage_start, 9].Value = condition;
+                                        img_condition.Clear();
+                                    }
+
                                     if (File.Exists(path + @"\temp\" + fileName))
                                     {
                                         Image img = Image.FromFile(path + @"\temp\" + fileName);
@@ -222,6 +222,11 @@ namespace optanaPCI
                                         after_img.SetSize(imgSize, imgSize);
                                         after_img.SetPosition(damage_start - 1, 0, 5, 0);
                                         damage_count = start - damage_start;
+                                    }
+
+                                    if (damage_count == 0)
+                                    {
+                                        start++;
                                     }
                                 }
                                 else
