@@ -701,7 +701,7 @@ namespace optanaPCI
                     {
                         level1.IsChecked = true;
                         level_Label.Content = "破壞等級 : " + level1.Content.ToString();
-                        image_show.categoryChange(level1.Content.ToString());
+                        image_show.levelChange(level1.Content.ToString());
                     }
                 }
                 else
